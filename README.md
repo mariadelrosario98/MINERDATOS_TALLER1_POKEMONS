@@ -17,14 +17,15 @@ La tabla a continuación muestra el tiempo total que tardó cada método en carg
 
 | Método                 | Tiempo Total (s) |
 | :--------------------- | :--------------- |
-| **Secuencial**         | [Tiempo]         |
-| **Threading**          | [Tiempo]         |
-| **Multiprocesamiento** | [Tiempo]         |
-| **Asyncio**            | [Tiempo]         |
+| **Secuencial**         | 49.65            |
+| **Threading**          | 6.368            |
+| **Multiprocesamiento** | 10.204           |
+| **Asyncio**            | 1.036            |
 
 ### 📊 Comparación Visual del Rendimiento
 
 El gráfico de barras demuestra claramente la diferencia de velocidad entre los concursantes.
+<img width="418" height="203" alt="image" src="https://github.com/user-attachments/assets/adb29c17-99b2-47da-b71a-c3b10c342365" />
 
 ---
 
