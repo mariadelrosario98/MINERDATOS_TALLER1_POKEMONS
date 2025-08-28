@@ -26,7 +26,8 @@ La tabla a continuación muestra el tiempo total que tardó cada método en carg
 
 El gráfico de barras demuestra claramente la diferencia de velocidad entre los concursantes.
 <p align="center">
-  <img width="418" height="203" alt="image" src="https://github.com/user-attachments/assets/adb29c17-99b2-47da-b71a-c3b10c342365" />
+  <<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/56e1f31c-926d-441f-b378-a054c7a0f92b" />
+/>
 </p>
 
 ## Velocidad promedio por imagen (s/img)
