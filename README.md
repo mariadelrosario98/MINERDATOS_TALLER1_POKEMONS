@@ -11,8 +11,10 @@
 
 ---
 
-## 🏁 Resultados de la Carrera
+## 🏁 Resultados de la Carrera (Indicadores de rendimiento)
+A continuación se muestran los siguientes indicadores de rendimiento para realizar la clasificación
 
+## Tiempo de ejecución carga total 
 La tabla a continuación muestra el tiempo total que tardó cada método en cargar las 151 imágenes.
 
 | Método                 | Tiempo Total (s) |
@@ -22,12 +24,41 @@ La tabla a continuación muestra el tiempo total que tardó cada método en carg
 | **Multiprocesamiento** | 10.204           |
 | **Asyncio**            | 1.036            |
 
-### 📊 Comparación Visual del Rendimiento
-
 El gráfico de barras demuestra claramente la diferencia de velocidad entre los concursantes.
 <p align="center">
   <img width="418" height="203" alt="image" src="https://github.com/user-attachments/assets/adb29c17-99b2-47da-b71a-c3b10c342365" />
 </p>
+
+## Velocidad promedio por imagen (s/img)
+
+Divide el tiempo total entre las 151 imágenes. Esto permite comparar qué tan rápido es cada método a nivel micro.
+
+## Uso de CPU y RAM (%)
+
+Añadir una tabla con los recursos consumidos por cada método durante la ejecución. Hace más evidente cuándo un método es “rápido” pero “caro” en recursos.
+
+## Eficiencia relativa (%)
+
+Mide cuánto más rápido es cada método respecto al secuencial. Ejemplo: Asyncio = 450% más rápido.
+
+## Consumo de energía estimado ⚡ (opcional, divertido)
+
+Usando proxies como uso de CPU, podrías simular un “score energético” y añadirlo como parte de la carrera.
+
+## Gráfico extra
+
+Además del gráfico de barras de tiempo, incluir:
+
+📉 Gráfico de líneas: progreso acumulado de descargas con cada método.
+
+📊 Radar chart: comparar simultáneamente tiempo, uso de CPU, uso de memoria.
+
+## Indicador lúdico
+
+Una “medalla” o emoji según la posición: 🥇, 🥈, 🥉, 🐢.
+
+Una barra de “diversión / creatividad” donde cada método tenga un puntaje según su estilo (ejemplo: Asyncio = “ninja runner”, Multiprocessing = “muscle power”).
+
 ---
 
 ## 🏆 Análisis y Veredicto
