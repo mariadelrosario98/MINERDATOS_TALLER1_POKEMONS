@@ -56,7 +56,13 @@ Multiprocesamiento (Central de Múltiples Núcleos): Este método es el ideal pa
 
 Secuencial (Tortuga): Este método, al no ser concurrente, no se beneficia del tiempo de inactividad de la CPU durante las operaciones de I/O. El procesador simplemente espera a que cada descarga termine antes de pasar a la siguiente, lo que se refleja en un tiempo de ejecución extremadamente lento y un uso de CPU ineficiente.
 
-En resumen, la medición de CPU no solo valida los resultados de tiempo, sino que también nos ayuda a entender la naturaleza fundamental de la tarea y a elegir la herramienta de concurrencia adecuada
+En resumen, la medición de CPU no solo valida los resultados de tiempo, sino que también nos ayuda a entender la naturaleza fundamental de la tarea y a elegir la herramienta de concurrencia adecuada. En esta tabla se pueden evidenciar la ejecución de la CPU en los diferentes ejercicios:
+
+| Proceso                          | Threading | Multiprocessing | asyncio | Sequential |
+|----------------------------------|-----------|-----------------|---------|------------|
+| Uso de CPU (por 1 CPU)           | 28.67%    | 0.40%           | 33.91%  | 4.61%      |
+| Uso de CPU (sobre todos los núcleos) | 2.39%     | 0.03%           | 2.83%   | 0.38%      |
+| Pico de RAM (RSS) (MB)           | 77.12     | 73.02           | 123.94  | 74.42      |
 
 ## Gráfico extra
 
