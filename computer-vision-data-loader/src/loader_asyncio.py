@@ -7,6 +7,8 @@ from typing import Annotated, Callable, Iterator, Sequence
 import aiohttp
 import asyncio
 import math
+import threading
+import psutil
 
 
 import numpy as np
@@ -52,14 +54,64 @@ async def load(
             
     return pokemon_rows
 
+def medir_recursos(func):
+    """Mide %CPU (por 1 CPU) usando cpu_times y pico de RSS con muestreo."""
+    def wrapper(*args, **kwargs):
+        proc = psutil.Process()
+        # --- muestreador de memoria para capturar pico RSS ---
+        stop_event = threading.Event()
+        peak_rss = {"mb": proc.memory_info().rss / (1024 * 1024)}
+
+        def _mem_sampler():
+            while not stop_event.is_set():
+                rss_mb = proc.memory_info().rss / (1024 * 1024)
+                if rss_mb > peak_rss["mb"]:
+                    peak_rss["mb"] = rss_mb
+                time.sleep(0.05)  # 50 ms
+
+        mem_thread = threading.Thread(target=_mem_sampler, daemon=True)
+        mem_thread.start()
+
+        # --- ventana de medición CPU basada en tiempo ---
+        start_wall = time.perf_counter()
+        ct = proc.cpu_times()
+        start_cpu = (ct.user + ct.system)
+
+        try:
+            result = func(*args, **kwargs)
+        finally:
+            stop_event.set()
+            mem_thread.join()
+
+        end_wall = time.perf_counter()
+        ct2 = proc.cpu_times()
+        end_cpu = (ct2.user + ct2.system)
+
+        wall = max(end_wall - start_wall, 1e-9)
+        cpu_time = max(end_cpu - start_cpu, 0.0)
+
+        # %CPU relativo a **una** CPU.
+        cpu_percent_1cpu = (cpu_time / wall) * 100.0
+        return result, cpu_percent_1cpu, peak_rss["mb"]
+    return wrapper
+
+
+@medir_recursos
+def carga_asincrona(csv_file_path):
+    return asyncio.run(load(sources=[csv_file_path]))
+
 if __name__ == "__main__":
     csv_file_path = pathlib.Path("..", "data", "pokemon-gen1-data.csv")
     total_start_time = time.perf_counter()
-    all_pokemons = asyncio.run(load(sources=[csv_file_path]))
+    all_pokemons, uso_cpu, uso_ram = carga_asincrona(csv_file_path)
 
     total_end_time = time.perf_counter()
     total_time = total_end_time - total_start_time
     print(f"Total time to load all Pokemons: {total_time:.2f} seconds")
+    print(f"Uso de CPU (por 1 CPU): {uso_cpu:.2f}%")
+    cpu_all = uso_cpu / max(psutil.cpu_count(logical=True), 1)
+    print(f"Uso de CPU (sobre todos los núcleos): {cpu_all:.2f}%")
+    print(f"Pico de RAM: {uso_ram:.2f} MB")
 
     num_pokemons = len(all_pokemons)
     grid_size= math.ceil(math.sqrt(num_pokemons))
