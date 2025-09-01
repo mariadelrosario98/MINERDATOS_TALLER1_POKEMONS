@@ -64,29 +64,36 @@ En resumen, la medición de CPU no solo valida los resultados de tiempo, sino qu
 | Uso de CPU (sobre todos los núcleos) | 2.39%     | 0.03%           | 2.83%   | 0.38%      |
 | Pico de RAM (RSS) (MB)           | 77.12     | 73.02           | 123.94  | 74.42      |
 
-## Gráfico extra
-
-Además del gráfico de barras de tiempo, incluir:
-
-📉 Gráfico de líneas: progreso acumulado de descargas con cada método.
-
-📊 Radar chart: comparar simultáneamente tiempo, uso de CPU, uso de memoria.
-
-
-
 ## Indicador lúdico
 
-Una “medalla” o emoji según la posición: 🥇, 🥈, 🥉, 🐢.
+<img width="436" height="431" alt="image" src="https://github.com/user-attachments/assets/8013b7ef-b8d6-42a8-807e-049d098b355a" />
 
-Una barra de “diversión / creatividad” donde cada método tenga un puntaje según su estilo (ejemplo: Asyncio = “ninja runner”, Multiprocessing = “muscle power”).
 
+La imagen es una comparación visual de dos tipos de problemas: I/O-bound y CPU-bound, utilizando una analogía con el mundo de Pokémon. La imagen se divide en dos secciones verticales.
+
+En la parte izquierda, etiquetada como "I/O-bound", se ilustra una carrera. Esta sección representa tareas que pasan la mayor parte del tiempo esperando a que se complete una operación de entrada/salida (como leer un archivo o una red).
+
+Sequential: Un Pokémon Espeon intenta mover una Pokébola con gran dificultad, simbolizando un proceso lento y secuencial, donde solo se puede trabajar en una tarea a la vez.
+
+Threading: Dos Pokémon Machoke colaboran para mover varias Pokébolas, mostrando cómo el threading (hilos de ejecución) permite realizar múltiples tareas de E/S de forma concurrente, mejorando el rendimiento.
+
+Asyncio: Un Pokémon Eevee corre por delante del resto, con varias Pokébolas suspendidas en el aire detrás de él, lo que representa la velocidad y eficiencia de asyncio para gestionar múltiples operaciones de E/S sin bloquearse.
+
+En la parte derecha, etiquetada como "CPU-bound", se muestra un levantamiento de pesas. Esta sección representa tareas que requieren una gran cantidad de procesamiento de la CPU, como cálculos complejos.
+
+Sequential: Un Pokémon Machoke y un Torkoal levantan pesas pesadas, cada uno por su cuenta. Esto simboliza un proceso secuencial donde cada tarea se completa en un solo núcleo de la CPU.
+
+Threading / Asyncio: Dos Pokémon Machamp levantan pesas aún más grandes, mostrando cómo el threading y asyncio pueden manejar tareas intensivas en CPU, pero con sus limitaciones. Un tercer Machamp, representado por un Gengar, levanta una roca aún más grande, simbolizando que el multiprocessing es superior para tareas que necesitan utilizar múltiples núcleos de la CPU.
+
+Multiprocessing: Un Pokémon Gengar levanta una enorme roca con la etiqueta "Multiprocessing CPU Core", lo que indica que esta es la mejor solución para problemas CPU-bound, ya que puede distribuir la carga de trabajo entre múltiples núcleos de la CPU para un rendimiento máximo.
+
+En resumen, la imagen utiliza una metáfora de carrera y levantamiento de pesas para explicar de manera intuitiva cuándo usar Asyncio (para I/O-bound) y cuándo usar Multiprocessing (para CPU-bound), mientras que Threading se posiciona como una opción intermedia o con limitaciones en ambos escenarios.
 ---
 
 ## 🏆 Análisis y Veredicto
 
-- **El ganador**: **Asyncio** demostró ser el más rápido en esta carrera, lo que confirma su superioridad para tareas de E/S intensivas, como la descarga de múltiples archivos desde la web.  
-- **El competidor más fuerte**: Aunque **Threading** también fue muy rápido, tiene una sobrecarga mayor que Asyncio.  
-- **El método más completo**: **Multiprocesamiento** es ideal para tareas que no solo son de E/S, sino que también tienen una alta demanda de CPU (por ejemplo, procesamiento de imágenes).  
+- **El ganador de la carrera (I/O bound)**: **Asyncio** demostró ser el más rápido en esta carrera, lo que confirma su superioridad para tareas de E/S intensivas, como la descarga de múltiples archivos desde la web.  
+- **El competidor más fuerte (CPU Bound)**: **Multiprocessing" es el método que tiene mayor utilidad para este tipo de problemas. 
 - **La línea base**: El método **Secuencial** nos sirve como punto de referencia para entender la ganancia de rendimiento que ofrecen las otras técnicas.  
 
 En conclusión, la elección del método de concurrencia depende de la naturaleza de la tarea. Para tareas de red y E/S como esta, **Asyncio** es la mejor opción.
